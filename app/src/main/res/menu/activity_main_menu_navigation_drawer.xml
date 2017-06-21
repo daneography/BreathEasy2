@@ -18,6 +18,23 @@
             android:id="@+id/navSettings"
             android:icon="@drawable/ic_menu_manage"
             android:title="Settings" />
+        <item
+            android:id="@+id/navAbout"
+            android:icon="@drawable/ic_menu_share"
+            android:title="About" />
     </group>
+    <item android:title="Log-in/Register">
+        <menu>
+            <item
+                android:id="@+id/navLogin"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Login" />
+            <item
+                android:id="@+id/navRegister"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Register" />
+        </menu>
+    </item>
+
 
 </menu>

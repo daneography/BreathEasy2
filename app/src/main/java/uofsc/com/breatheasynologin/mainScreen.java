@@ -60,7 +60,8 @@ public class mainScreen extends Fragment implements View.OnClickListener {
     private void goToCommunities() {
         Fragment communities = new communitiesFragment();
         FragmentTransaction ft3 = getFragmentManager().beginTransaction();
-        ft3.replace(R.id.constraintLayout, communities);
+        getFragmentManager().popBackStack();
+        ft3.replace(R.id.constraintLayout, communities).addToBackStack("tag");
         ft3.commit();
 
     }
@@ -68,14 +69,16 @@ public class mainScreen extends Fragment implements View.OnClickListener {
     private void goToDaily() {
         Fragment daily = new dailyFragment();
         FragmentTransaction ft2 = getFragmentManager().beginTransaction();
-        ft2.replace(R.id.constraintLayout, daily);
+        getFragmentManager().popBackStack();
+        ft2.replace(R.id.constraintLayout, daily).addToBackStack("tag");
         ft2.commit();
     }
 
     private void goToMindfulness() {
         Fragment mindfulness = new mindfulnessFragment();
         FragmentTransaction ft1 = getFragmentManager().beginTransaction();
-        ft1.replace(R.id.constraintLayout, mindfulness);
+        getFragmentManager().popBackStack();
+        ft1.replace(R.id.constraintLayout, mindfulness).addToBackStack("tag");
         ft1.commit();
 
     }
