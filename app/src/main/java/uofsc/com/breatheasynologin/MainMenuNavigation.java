@@ -5,6 +5,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +27,8 @@ public class MainMenuNavigation extends AppCompatActivity
         setContentView(R.layout.activity_main_menu_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //up button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -35,6 +39,10 @@ public class MainMenuNavigation extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         initFrag();
+
+
+
+
     }
 
     @Override
@@ -56,17 +64,20 @@ public class MainMenuNavigation extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch(item.getItemId()){
+            case android.R.id.home:
+                FragmentManager fm = getSupportFragmentManager();
+                if (fm.getBackStackEntryCount()>0){
+                    fm.popBackStack();
+                }
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_tutorial) {
-            return true;
+            case  R.id.action_tutorial:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -116,14 +127,18 @@ public class MainMenuNavigation extends AppCompatActivity
         ft1.commit();
 
     }
-    private void initFrag(){
+
+    private void initFrag() {
         Fragment fragment;
         fragment = new mainScreen();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.constraintLayout,fragment);
+        ft.replace(R.id.constraintLayout, fragment);
         ft.commit();
     }
-    }
+
+
+
+}
 
 
 
