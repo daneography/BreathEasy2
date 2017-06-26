@@ -25,23 +25,12 @@ public class mindfulnessFragment extends Fragment implements View.OnClickListene
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_mindfulness,container,false);
+
         initViews(view);
         return view;
 
     }
-    OnButtonPressListener buttonListener;
 
-    @Override
-    public void onAttach(Context context){
-        super.onAttach(context);
-        try{
-            buttonListener = (OnButtonPressListener)getActivity();
-        }catch (ClassCastEception e){
-            throw new ClassCastException(context.toString() + " must implemtn onButtonPressed")
-        }
-
-
-    }
 
     private void initViews(View view){
 
@@ -62,14 +51,6 @@ public class mindfulnessFragment extends Fragment implements View.OnClickListene
         btnWeek6.setOnClickListener(this);
         btnWeek7.setOnClickListener(this);
         btnWeek8.setOnClickListener(this);
-
-        Button but = (button)view.findViewById(R.id.button1);
-        but.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                buttonListener.onButtonPressed("Message from First Fragment");
-            }
-        });
 
     }
 

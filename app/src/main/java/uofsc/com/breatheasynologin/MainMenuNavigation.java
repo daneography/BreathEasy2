@@ -2,6 +2,7 @@ package uofsc.com.breatheasynologin;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -34,12 +35,12 @@ public class MainMenuNavigation extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         initFrag();
-
 
 
 
@@ -73,7 +74,18 @@ public class MainMenuNavigation extends AppCompatActivity
                 return true;
 
             case  R.id.action_tutorial:
+                // We normally won't show the welcome slider again in real app
+                // but this is for testing
+                PrefManager prefManager = new PrefManager(getApplicationContext());
+
+                // make first time launch TRUE
+                prefManager.setFirstTimeLaunch(true);
+
+                startActivity(new Intent(MainMenuNavigation.this, welcomeActivity.class));
+                finish();
                 return true;
+
+
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -94,8 +106,10 @@ public class MainMenuNavigation extends AppCompatActivity
             goToCommunities();
         } else if (id == R.id.navSettings) {
             Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-
-
+        }else if (id == R.id.navLogin) {
+            goToLogin();
+        } else if (id == R.id.navRegister) {
+            goToRegister();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -125,7 +139,22 @@ public class MainMenuNavigation extends AppCompatActivity
         getFragmentManager().popBackStack();
         ft1.replace(R.id.constraintLayout, mindfulness).addToBackStack("tag");
         ft1.commit();
+    }
 
+    private void goToRegister() {
+        Fragment mindfulness = new mindfulnessFragment();
+        FragmentTransaction ft1 = getFragmentManager().beginTransaction();
+        getFragmentManager().popBackStack();
+        ft1.replace(R.id.constraintLayout, mindfulness).addToBackStack("tag");
+        ft1.commit();
+    }
+
+    private void goToLogin() {
+        Fragment mindfulness = new mindfulnessFragment();
+        FragmentTransaction ft1 = getFragmentManager().beginTransaction();
+        getFragmentManager().popBackStack();
+        ft1.replace(R.id.constraintLayout, mindfulness).addToBackStack("tag");
+        ft1.commit();
     }
 
     private void initFrag() {
