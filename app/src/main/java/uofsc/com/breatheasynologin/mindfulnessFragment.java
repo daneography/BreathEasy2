@@ -11,6 +11,7 @@ import android.app.FragmentTransaction;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,8 +30,8 @@ public class mindfulnessFragment extends Fragment implements View.OnClickListene
         initViews(view);
         return view;
 
-    }
 
+    }
 
     private void initViews(View view){
 
