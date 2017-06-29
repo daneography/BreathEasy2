@@ -28,25 +28,25 @@ public class MainMenuNavigation extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_navigation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
+
         //up button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         initFrag();
-
-
-
     }
+
 
     @Override
     public void onBackPressed() {
@@ -108,7 +108,7 @@ public class MainMenuNavigation extends AppCompatActivity
         } else if (id == R.id.navCommunities) {
             goToCommunities();
         } else if (id == R.id.navSettings) {
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+            goToSettings();
         }else if (id == R.id.navLogin) {
             goToLogin();
         } else if (id == R.id.navRegister) {
@@ -145,18 +145,26 @@ public class MainMenuNavigation extends AppCompatActivity
     }
 
     private void goToRegister() {
-        Fragment mindfulness = new mindfulnessFragment();
+        Fragment register = new RegisterFragment();
         FragmentTransaction ft1 = getFragmentManager().beginTransaction();
         getFragmentManager().popBackStack();
-        ft1.replace(R.id.constraintLayout, mindfulness).addToBackStack("tag");
+        ft1.replace(R.id.constraintLayout, register).addToBackStack("tag");
         ft1.commit();
     }
 
     private void goToLogin() {
-        Fragment mindfulness = new mindfulnessFragment();
+        Fragment login = new LoginFragment();
         FragmentTransaction ft1 = getFragmentManager().beginTransaction();
         getFragmentManager().popBackStack();
-        ft1.replace(R.id.constraintLayout, mindfulness).addToBackStack("tag");
+        ft1.replace(R.id.constraintLayout, login).addToBackStack("tag");
+        ft1.commit();
+    }
+
+    private void goToSettings() {
+        Fragment settings = new settingsFragment();
+        FragmentTransaction ft1 = getFragmentManager().beginTransaction();
+        getFragmentManager().popBackStack();
+        ft1.replace(R.id.constraintLayout, settings).addToBackStack("tag");
         ft1.commit();
     }
 
